@@ -3,6 +3,7 @@ E:\new\Enterprise Application\product-management-system\common-exception\src\mai
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\dto\ValidationErrorResponse.java
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\BadRequestException.java
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\ForbiddenException.java
+E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\ResourceAlreadyExistsException.java
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\ResourceNotFoundException.java
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\ServiceUnavailableException.java
 E:\new\Enterprise Application\product-management-system\common-exception\src\main\java\com\product\commonexception\exception\UnauthorizedException.java

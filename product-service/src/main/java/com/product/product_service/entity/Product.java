@@ -57,7 +57,7 @@ public class Product {
     private CurrencyType currency;
 
     @Enumerated(EnumType.STRING)
-    private ProductCondition condition;
+    private ProductCondition productCondition;
 
     @Enumerated(EnumType.STRING)
     private ProductStatus status;

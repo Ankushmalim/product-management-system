@@ -2,11 +2,7 @@ package com.product.commonexception.handler;
 
 import com.product.commonexception.dto.ErrorResponse;
 import com.product.commonexception.dto.ValidationErrorResponse;
-import com.product.commonexception.exception.BadRequestException;
-import com.product.commonexception.exception.ForbiddenException;
-import com.product.commonexception.exception.ResourceNotFoundException;
-import com.product.commonexception.exception.ServiceUnavailableException;
-import com.product.commonexception.exception.UnauthorizedException;
+import com.product.commonexception.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -41,6 +37,28 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(
                 response,
                 HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse>
+    handleResourceAlreadyExistsException(
+            ResourceAlreadyExistsException ex,
+            HttpServletRequest request
+    ) {
+
+        ErrorResponse response =
+                ErrorResponse.builder()
+                        .message(ex.getMessage())
+                        .status(HttpStatus.CONFLICT.value())
+                        .error(HttpStatus.CONFLICT.name())
+                        .timestamp(LocalDateTime.now())
+                        .path(request.getRequestURI())
+                        .build();
+
+        return new ResponseEntity<>(
+                response,
+                HttpStatus.CONFLICT
+        );
     }
 
     @ExceptionHandler(BadRequestException.class)
