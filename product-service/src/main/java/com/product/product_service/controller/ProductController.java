@@ -1,5 +1,6 @@
 package com.product.product_service.controller;
 
+import com.product.commonResponse.dto.ApiResponse;
 import com.product.product_service.dto.request.ProductRequestDto;
 import com.product.product_service.dto.request.ProductUpdateRequestDto;
 import com.product.product_service.dto.response.ProductResponseDto;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,20 +22,29 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(
-            @Valid @RequestBody ProductRequestDto dto) {
+    public ResponseEntity<ApiResponse<ProductResponseDto>> createProduct(
+            @RequestBody @Valid ProductRequestDto dto) {
 
-        ProductResponseDto response = productService.createProduct(dto);
+        ProductResponseDto product = productService.createProduct(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponseUtil.success(
+                        "Product created successfully",
+                        product));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> getProductById(
+    public ResponseEntity<ApiResponse<ProductResponseDto>> getProductById(
             @PathVariable Long id) {
 
-        ProductResponseDto response = productService.getProductById(id);
-
+        ProductResponseDto product = productService.getProductById(id);
+        ApiResponse<ProductResponseDto> response = ApiResponse
+                .<ProductResponseDto>builder()
+                .success(true)
+                .message("Product fetched successfully")
+                .timestamp(LocalDateTime.now())
+                .data(product)
+                .build();
         return ResponseEntity.ok(response);
     }
 
@@ -46,22 +57,36 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> updateProduct(
+    public ResponseEntity<ApiResponse<ProductResponseDto>> updateProduct(
             @PathVariable Long id,
             @Valid @RequestBody ProductRequestDto dto) {
 
-        ProductResponseDto response = productService.updateProduct(id, dto);
-
+        ProductResponseDto product = productService.updateProduct(id, dto);
+        ApiResponse<ProductResponseDto> response = ApiResponse
+                .<ProductResponseDto>builder()
+                .success(true)
+                .message("Product updated successfully")
+                .timestamp(LocalDateTime.now())
+                .data(product)
+                .build();
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> partialUpdate(
+    public ResponseEntity<ApiResponse<ProductResponseDto>> partialUpdate(
             @PathVariable Long id,
             @RequestBody ProductUpdateRequestDto dto) {
+        ProductResponseDto product = productService.partialUpdateProduct(id, dto);
 
-        return ResponseEntity.ok(
-                productService.partialUpdateProduct(id, dto));
+        ApiResponse<ProductResponseDto> response = ApiResponse
+                .<ProductResponseDto>builder()
+                .success(true)
+                .message("Product updated successfully")
+                .timestamp(LocalDateTime.now())
+                .data(product)
+                .build();
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")

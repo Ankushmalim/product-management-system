@@ -9,6 +9,6 @@
         <module>config-server</module> 
         <module>api-gateway</module>
         <module>user-service</module>
-        <module>common-exception</module> 
+        <module>common</module>
     </modules> 
 </project>
