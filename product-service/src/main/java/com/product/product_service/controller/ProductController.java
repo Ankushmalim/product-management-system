@@ -1,6 +1,7 @@
 package com.product.product_service.controller;
 
 import com.product.product_service.dto.request.ProductRequestDto;
+import com.product.product_service.dto.request.ProductUpdateRequestDto;
 import com.product.product_service.dto.response.ProductResponseDto;
 import com.product.product_service.service.ProductService;
 import jakarta.validation.Valid;
@@ -52,6 +53,15 @@ public class ProductController {
         ProductResponseDto response = productService.updateProduct(id, dto);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> partialUpdate(
+            @PathVariable Long id,
+            @RequestBody ProductUpdateRequestDto dto) {
+
+        return ResponseEntity.ok(
+                productService.partialUpdateProduct(id, dto));
     }
 
     @DeleteMapping("/{id}")

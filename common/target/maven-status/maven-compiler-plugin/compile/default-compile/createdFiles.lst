@@ -1,5 +1,7 @@
 com\product\commonexception\dto\ErrorResponse$ErrorResponseBuilder.class
+com\product\commonResponse\dto\ApiResponse.class
 com\product\commonexception\exception\ForbiddenException.class
+com\product\commonResponse\dto\ApiResponse$ApiResponseBuilder.class
 com\product\commonexception\dto\ErrorResponse.class
 com\product\commonexception\exception\UnauthorizedException.class
 com\product\commonexception\constants\ErrorConstants.class

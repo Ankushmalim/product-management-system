@@ -3,6 +3,7 @@ package com.product.product_service.service.serviceImpl;
 import com.product.commonexception.exception.ResourceAlreadyExistsException;
 import com.product.commonexception.exception.ResourceNotFoundException;
 import com.product.product_service.dto.request.ProductRequestDto;
+import com.product.product_service.dto.request.ProductUpdateRequestDto;
 import com.product.product_service.dto.response.ProductResponseDto;
 import com.product.product_service.entity.Product;
 import com.product.product_service.mapper.ProductMapper;
@@ -60,6 +61,38 @@ public class ProductServiceImpl implements ProductService {
         Product savedProduct = productRepository.save(existingProduct);
 
         return ProductMapper.toResponse(savedProduct);
+    }
+
+    @Override
+    public ProductResponseDto partialUpdateProduct(
+            Long id,
+            ProductUpdateRequestDto dto) {
+
+        Product product = getProduct(id);
+
+        // Duplicate SKU Check
+        if (dto.getSku() != null
+                && !dto.getSku().equals(product.getSku())
+                && productRepository.existsBySku(dto.getSku())) {
+
+            throw new ResourceAlreadyExistsException(
+                    "Product already exists with SKU : " + dto.getSku());
+        }
+
+        // Duplicate Slug Check
+        if (dto.getSlug() != null
+                && !dto.getSlug().equals(product.getSlug())
+                && productRepository.existsBySlug(dto.getSlug())) {
+
+            throw new ResourceAlreadyExistsException(
+                    "Product already exists with Slug : " + dto.getSlug());
+        }
+
+        ProductMapper.partialUpdate(product, dto);
+
+        Product updatedProduct = productRepository.save(product);
+
+        return ProductMapper.toResponse(updatedProduct);
     }
 
     @Override

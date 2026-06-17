@@ -1,6 +1,7 @@
 package com.product.product_service.mapper;
 
 import com.product.product_service.dto.request.ProductRequestDto;
+import com.product.product_service.dto.request.ProductUpdateRequestDto;
 import com.product.product_service.dto.response.ProductResponseDto;
 import com.product.product_service.entity.Product;
 import com.product.product_service.entity.ProductImage;
@@ -206,6 +207,63 @@ public final class ProductMapper {
                     });
         }
 
+    }
+
+    public static void partialUpdate(Product product,
+                                     ProductUpdateRequestDto dto) {
+
+        if (dto == null || product == null) {
+            return;
+        }
+
+        if (dto.getName() != null)
+            product.setName(dto.getName());
+
+        if (dto.getSlug() != null)
+            product.setSlug(dto.getSlug());
+
+        if (dto.getShortDescription() != null)
+            product.setShortDescription(dto.getShortDescription());
+
+        if (dto.getDescription() != null)
+            product.setDescription(dto.getDescription());
+
+        if (dto.getSku() != null)
+            product.setSku(dto.getSku());
+
+        if (dto.getBrand() != null)
+            product.setBrand(dto.getBrand());
+
+        if (dto.getCategoryId() != null)
+            product.setCategoryId(dto.getCategoryId());
+
+        if (dto.getPrice() != null)
+            product.setPrice(dto.getPrice());
+
+        if (dto.getDiscountPrice() != null)
+            product.setDiscountPrice(dto.getDiscountPrice());
+
+        if (dto.getWeight() != null)
+            product.setWeight(dto.getWeight());
+
+        if (dto.getWeightUnit() != null)
+            product.setWeightUnit(dto.getWeightUnit());
+
+        if (dto.getCurrency() != null)
+            product.setCurrency(dto.getCurrency());
+
+        if (dto.getProductCondition() != null)
+            product.setProductCondition(dto.getProductCondition());
+
+        if (dto.getStatus() != null)
+            product.setStatus(dto.getStatus());
+
+        if (dto.getActive() != null)
+            product.setActive(dto.getActive());
+
+        // Images, Specifications, Variants
+        // We'll handle these separately because collection updates
+        // require more than a simple field assignment.
     }
 
 }

@@ -15,10 +15,10 @@
 
     <!-- Project Details -->
     <groupId>com.common</groupId>
-    <artifactId>common-exception</artifactId>
+    <artifactId>common</artifactId>
     <version>1.0.0</version>
-    <name>common-exception</name>
-    <description>Common Exception Module</description>
+    <name>common</name>
+    <description>Common Module</description>
 
     <!-- Jar Packaging -->
     <packaging>jar</packaging>

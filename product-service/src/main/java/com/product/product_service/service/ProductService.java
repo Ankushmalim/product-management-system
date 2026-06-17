@@ -1,6 +1,7 @@
 package com.product.product_service.service;
 
 import com.product.product_service.dto.request.ProductRequestDto;
+import com.product.product_service.dto.request.ProductUpdateRequestDto;
 import com.product.product_service.dto.response.ProductResponseDto;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public interface ProductService {
     List<ProductResponseDto> getAllProducts();
 
     ProductResponseDto updateProduct(Long id, ProductRequestDto dto);
+
+    ProductResponseDto partialUpdateProduct(
+            Long id,
+            ProductUpdateRequestDto dto);
 
     void deleteProduct(Long id);
 
